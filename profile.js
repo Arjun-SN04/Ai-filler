@@ -542,6 +542,134 @@ document.getElementById('parseBtn').addEventListener('click', async () => {
   await parseResume(text);
 });
 
+// ── Export profile as text ────────────────────────────────────────────────────
+
+function generateProfileText() {
+  const p = collectProfile();
+  const lines = [];
+
+  // Header
+  const name = [p.personal?.firstName, p.personal?.lastName].filter(Boolean).join(' ');
+  if (name) lines.push(name.toUpperCase());
+
+  const contacts = [p.personal?.email, p.personal?.phone, [p.personal?.city, p.personal?.state, p.personal?.country].filter(Boolean).join(', ')].filter(Boolean);
+  if (contacts.length) lines.push(contacts.join(' | '));
+
+  const links = [p.personal?.linkedin, p.personal?.github, p.personal?.portfolio].filter(Boolean);
+  if (links.length) lines.push(links.join(' | '));
+
+  lines.push('');
+
+  // Professional Summary
+  if (p.professional?.summary) {
+    lines.push('PROFESSIONAL SUMMARY');
+    lines.push(p.professional.summary);
+    lines.push('');
+  }
+
+  // Professional Details
+  const profDetails = [];
+  if (p.professional?.currentTitle)    profDetails.push(`Current Title: ${p.professional.currentTitle}`);
+  if (p.professional?.yearsExperience) profDetails.push(`Years of Experience: ${p.professional.yearsExperience}`);
+  if (p.professional?.workType)        profDetails.push(`Work Type: ${p.professional.workType}`);
+  if (p.professional?.noticePeriod)    profDetails.push(`Notice Period: ${p.professional.noticePeriod}`);
+  if (p.professional?.desiredSalary)   profDetails.push(`Expected Salary: ${p.professional.desiredSalary} ${p.professional.currency || ''}`);
+  if (profDetails.length) {
+    lines.push('PROFESSIONAL DETAILS');
+    profDetails.forEach(d => lines.push(d));
+    lines.push('');
+  }
+
+  // Work Experience
+  if (p.experience?.length) {
+    lines.push('EXPERIENCE');
+    p.experience.forEach(e => {
+      const period = [e.startDate, e.current ? 'Present' : e.endDate].filter(Boolean).join(' – ');
+      lines.push(`${e.title || ''}${e.title && e.company ? ' @ ' : ''}${e.company || ''} | ${period}${e.location ? ' | ' + e.location : ''}`);
+      if (e.description) lines.push(e.description);
+      lines.push('');
+    });
+  }
+
+  // Projects
+  if (p.projects?.length) {
+    lines.push('PROJECTS');
+    p.projects.forEach(pr => {
+      const period = [pr.startDate, pr.endDate].filter(Boolean).join(' – ');
+      lines.push(`${pr.name || 'Project'}${period ? ' | ' + period : ''}${pr.solo ? ' | Individual' : ' | Team'}${pr.link ? ' | ' + pr.link : ''}`);
+      if (pr.techStack) lines.push(`Tech: ${pr.techStack}`);
+      if (pr.description) lines.push(pr.description);
+      lines.push('');
+    });
+  }
+
+  // Education
+  if (p.education?.length) {
+    lines.push('EDUCATION');
+    p.education.forEach(e => {
+      const period = [e.startYear, e.endYear].filter(Boolean).join(' – ');
+      lines.push(`${e.degree || ''}${e.field ? ' in ' + e.field : ''} – ${e.school || ''}${period ? ' (' + period + ')' : ''}${e.gpa ? ' | GPA: ' + e.gpa : ''}`);
+    });
+    lines.push('');
+  }
+
+  // Skills
+  if (p.skills) {
+    lines.push('SKILLS');
+    lines.push(p.skills);
+    lines.push('');
+  }
+
+  // Certifications
+  if (p.certifications) {
+    lines.push('CERTIFICATIONS');
+    lines.push(p.certifications);
+    lines.push('');
+  }
+
+  // Languages
+  if (p.languages) {
+    lines.push('LANGUAGES');
+    lines.push(p.languages);
+    lines.push('');
+  }
+
+  // Custom Q&A
+  if (p.customQA?.length) {
+    const valid = p.customQA.filter(q => q.question && q.answer);
+    if (valid.length) {
+      lines.push('CUSTOM Q&A');
+      valid.forEach(q => { lines.push(`Q: ${q.question}`); lines.push(`A: ${q.answer}`); lines.push(''); });
+    }
+  }
+
+  return lines.join('\n').trim();
+}
+
+document.getElementById('exportProfileBtn').addEventListener('click', async () => {
+  const text = generateProfileText();
+  document.getElementById('exportPreview').value = text;
+  try {
+    await navigator.clipboard.writeText(text);
+    const btn = document.getElementById('exportProfileBtn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  } catch {
+    // Clipboard blocked — text is still visible in the preview box
+  }
+});
+
+document.getElementById('exportToParseBtn').addEventListener('click', () => {
+  const text = generateProfileText();
+  document.getElementById('exportPreview').value = text;
+  document.getElementById('resumeText').value = text;
+  // Scroll up to the parse section
+  document.getElementById('resumeText').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('resumeText').focus();
+});
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 
 loadProfile();
+

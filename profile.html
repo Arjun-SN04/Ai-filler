@@ -109,6 +109,28 @@
         <textarea id="resumeText" placeholder="Paste your resume text here if PDF upload doesn't work, then click Parse with AI above…"></textarea>
       </div>
     </div>
+
+    <!-- Export saved data as text -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Export Saved Profile as Text
+      </div>
+      <p style="font-size:12px;color:var(--text-2);margin-bottom:12px">
+        Generates a readable text version of all your saved profile data. Copy it to transfer your profile to another device — paste it in the box above and click <strong>Parse with AI</strong>.
+      </p>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <button class="btn-save" id="exportProfileBtn" style="flex:1;justify-content:center">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          Copy to Clipboard
+        </button>
+        <button class="btn-add" id="exportToParseBtn" style="flex:1;justify-content:center">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline></svg>
+          Paste into Parse Box
+        </button>
+      </div>
+      <textarea id="exportPreview" style="min-height:160px;font-family:monospace;font-size:11px;color:var(--text-2);background:var(--bg-3);border:1px solid var(--border);border-radius:8px;padding:10px;width:100%;box-sizing:border-box;resize:vertical" placeholder="Click 'Copy to Clipboard' to generate the text…" readonly></textarea>
+    </div>
   </div>
 
   <!-- ── PERSONAL TAB ── -->
