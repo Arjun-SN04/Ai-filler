@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile — Form Filler AI</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+<div class="page">
+
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="page-header-brand">
+      <div class="header-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+      </div>
+      <div>
+        <h1>My Profile</h1>
+        <p>Your resume data powers AI form filling</p>
+      </div>
+    </div>
+    <button class="btn-save" id="saveBtn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+        <polyline points="7 3 7 8 15 8"></polyline>
+      </svg>
+      Save Profile
+    </button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-tab="resume">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+      Resume
+    </button>
+    <button class="tab" data-tab="personal">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      Personal
+    </button>
+    <button class="tab" data-tab="professional">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      Professional
+    </button>
+    <button class="tab" data-tab="experience">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      Experience
+    </button>
+    <button class="tab" data-tab="projects">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 22 22 7 12 2"></polygon></svg>
+      Projects
+    </button>
+    <button class="tab" data-tab="education">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+      Education
+    </button>
+    <button class="tab" data-tab="skills">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+      Skills
+    </button>
+    <button class="tab" data-tab="qa">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Q&amp;A
+    </button>
+  </div>
+
+  <!-- ── RESUME TAB ── -->
+  <div class="section active" id="section-resume">
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+        Upload Resume (PDF or TXT)
+      </div>
+
+      <!-- Drop zone -->
+      <div class="resume-zone" id="resumeZone">
+        <div class="resume-zone-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        </div>
+        <h3>Drop your resume here</h3>
+        <p>PDF or TXT · AI will extract and fill your profile automatically</p>
+        <input type="file" id="resumeFileInput" accept=".pdf,.txt" style="display:none">
+      </div>
+
+      <!-- File selected info -->
+      <div class="resume-file-info" id="resumeFileInfo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span class="resume-file-name" id="resumeFileName"></span>
+        <button class="btn-parse" id="parseBtn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Parse with AI
+        </button>
+      </div>
+
+      <!-- Status -->
+      <div class="parse-status" id="parseStatus"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        Or Paste Resume Text
+      </div>
+      <div class="resume-paste-area">
+        <textarea id="resumeText" placeholder="Paste your resume text here if PDF upload doesn't work, then click Parse with AI above…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PERSONAL TAB ── -->
+  <div class="section" id="section-personal">
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        Personal Information
+      </div>
+      <div class="grid">
+        <div class="field"><label>First Name</label><input type="text" id="firstName" placeholder="Arjun"></div>
+        <div class="field"><label>Last Name</label><input type="text" id="lastName" placeholder="Nair"></div>
+        <div class="field"><label>Email</label><input type="email" id="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Phone</label><input type="tel" id="phone" placeholder="+91 99999 99999"></div>
+        <div class="field col-2"><label>Street Address</label><input type="text" id="address" placeholder="123 Main St, Apt 4"></div>
+        <div class="field"><label>City</label><input type="text" id="city" placeholder="New Delhi"></div>
+        <div class="field"><label>State / Province</label><input type="text" id="state" placeholder="Delhi"></div>
+        <div class="field"><label>ZIP / Postal Code</label><input type="text" id="zip" placeholder="110001"></div>
+        <div class="field"><label>Country</label><input type="text" id="country" placeholder="India"></div>
+        <div class="field"><label>Nationality</label><input type="text" id="nationality" placeholder="Indian"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+        Online Presence
+      </div>
+      <div class="grid">
+        <div class="field"><label>LinkedIn URL</label><input type="url" id="linkedin" placeholder="https://linkedin.com/in/arjun-s-nair"></div>
+        <div class="field"><label>GitHub URL</label><input type="url" id="github" placeholder="https://github.com/Arjun-SN04"></div>
+        <div class="field"><label>Portfolio / Website</label><input type="url" id="portfolio" placeholder="https://arjunsn-portfolio.vercel.app"></div>
+        <div class="field"><label>Other Profile</label><input type="url" id="otherUrl" placeholder="https://..."></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROFESSIONAL TAB ── -->
+  <div class="section" id="section-professional">
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        Professional Details
+      </div>
+      <div class="grid">
+        <div class="field"><label>Current / Last Job Title</label><input type="text" id="currentTitle" placeholder="Full Stack AI Developer"></div>
+        <div class="field"><label>Desired Job Title</label><input type="text" id="desiredTitle" placeholder="Senior Full Stack Engineer"></div>
+        <div class="field"><label>Years of Experience</label><input type="number" id="yearsExperience" placeholder="2" min="0" max="60"></div>
+        <div class="field"><label>Work Authorization</label>
+          <select id="workAuthorization">
+            <option>US Citizen</option><option>US Permanent Resident (Green Card)</option>
+            <option>H-1B Visa Holder</option><option>F-1 / OPT</option>
+            <option>TN Visa</option><option>Indian Citizen</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label>Requires Sponsorship?</label>
+          <select id="requireSponsorship"><option value="No">No</option><option value="Yes">Yes</option></select>
+        </div>
+        <div class="field"><label>Notice Period</label>
+          <select id="noticePeriod">
+            <option>Immediately available</option><option>1 week</option><option>2 weeks</option>
+            <option>1 month</option><option>2 months</option><option>3 months</option>
+          </select>
+        </div>
+        <div class="field"><label>Preferred Work Type</label>
+          <select id="workType">
+            <option>Remote</option><option>Hybrid</option><option>On-site</option>
+            <option>Remote or Hybrid</option><option>Any</option>
+          </select>
+        </div>
+        <div class="field"><label>Willing to Relocate?</label>
+          <select id="willingToRelocate">
+            <option>Yes</option><option>No</option><option>Maybe (depends on role)</option>
+          </select>
+        </div>
+        <div class="field col-2">
+          <label>Professional Summary / Bio</label>
+          <textarea id="summary" placeholder="Write 2-3 sentences about yourself and your expertise. Used for 'About yourself' and cover letter fields."></textarea>
+          <span class="hint">Used for open-ended intro fields and AI-generated cover letters.</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        Compensation &amp; Availability
+      </div>
+      <div class="grid-3">
+        <div class="field"><label>Current Salary</label><input type="text" id="currentSalary" placeholder="800000"><span class="hint">Numbers only</span></div>
+        <div class="field"><label>Minimum Acceptable</label><input type="text" id="minSalary" placeholder="1000000"><span class="hint">Lowest you'd accept</span></div>
+        <div class="field"><label>Expected / Desired</label><input type="text" id="desiredSalary" placeholder="1400000"></div>
+        <div class="field"><label>Currency</label>
+          <select id="currency"><option>INR</option><option>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option></select>
+        </div>
+        <div class="field"><label>Pay Period</label>
+          <select id="payPeriod"><option>Annual</option><option>Monthly</option><option>Hourly</option></select>
+        </div>
+        <div class="field"><label>Available From</label><input type="text" id="availability" placeholder="Immediately"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EXPERIENCE TAB ── -->
+  <div class="section" id="section-experience">
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        Work Experience
+      </div>
+      <div class="entry-list" id="experienceList"></div>
+      <button class="btn-add" id="addExpBtn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Add Work Experience
+      </button>
+    </div>
+  </div>
+
+  <!-- ── PROJECTS TAB ── -->
+  <div class="section" id="section-projects">
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 22 22 7 12 2"></polygon></svg>
+        Personal / Side Projects
+      </div>
+      <p style="font-size:12px;color:var(--text-2);margin-bottom:14px">
+        These are used by the AI when asked about projects you personally built. Include ALL projects from your resume — they are automatically picked based on the question keywords.
+      </p>
+      <div class="entry-list" id="projectsList"></div>
+      <button class="btn-add" id="addProjectBtn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Add Project
+      </button>
+    </div>
+  </div>
+
+  <!-- ── EDUCATION TAB ── -->
+  <div class="section" id="section-education">
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+        Education
+      </div>
+      <div class="entry-list" id="educationList"></div>
+      <button class="btn-add" id="addEduBtn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Add Education
+      </button>
+    </div>
+  </div>
+
+  <!-- ── SKILLS TAB ── -->
+  <div class="section" id="section-skills">
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        Technical Skills
+      </div>
+      <div class="field">
+        <label>Skills (comma-separated)</label>
+        <textarea id="skills" style="min-height:90px" placeholder="JavaScript, TypeScript, React.js, Node.js, Python, AWS, Docker…"></textarea>
+        <span class="hint">List all technical and soft skills. AI picks the most relevant per form.</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg>
+        Certifications
+      </div>
+      <div class="field"><textarea id="certifications" style="min-height:70px" placeholder="AWS Solutions Architect (2023), Google Cloud (2022)…"></textarea></div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        Languages
+      </div>
+      <div class="field"><textarea id="languages" style="min-height:55px" placeholder="English (Fluent), Hindi (Native)…"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ── Q&A TAB ── -->
+  <div class="section" id="section-qa">
+
+    <!-- Custom Context — analyzed before every form fill -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.5" stroke-width="2.5"></line></svg>
+        Additional Context
+      </div>
+      <p style="font-size:12px;color:var(--text-2);margin-bottom:10px">
+        Free-form notes the AI reads before filling any form. Add anything not captured elsewhere — personal achievements, constraints, preferences, or context the AI should always know.
+      </p>
+      <div class="field">
+        <textarea id="customContext" style="min-height:100px" placeholder="Examples:&#10;• Patent holder in AI-assisted learning systems&#10;• Prefer backend/full-stack roles, not pure frontend&#10;• Open to contract roles alongside full-time&#10;• Do not disclose current employer to recruiters&#10;• Hackathon finalist: Smart India Hackathon, Microsoft Imagine Cup"></textarea>
+      </div>
+    </div>
+
+    <!-- Structured Q&A -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Custom Q&amp;A
+      </div>
+      <p style="font-size:12px;color:var(--text-2);margin-bottom:14px">Pre-write answers to common job application questions. AI picks the most relevant one when a matching question appears.</p>
+      <div class="entry-list" id="qaList"></div>
+      <button class="btn-add" id="addQABtn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Add Q&amp;A
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+  Profile saved
+</div>
+
+<script src="pdf.min.js"></script>
+<script src="profile.js"></script>
+</body>
+</html>

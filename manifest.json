@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Form Filler AI",
+  "version": "2.0.0",
+  "description": "AI-powered job form auto-filler using Groq — resume-driven, instant.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://api.groq.com/*",
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Form Filler AI"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["pdf.worker.min.js", "pdf.min.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
